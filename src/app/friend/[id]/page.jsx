@@ -52,11 +52,9 @@ export default function FriendDetails() {
       iconPath: iconMap[type],
     };
 
-    // Save to localStorage
     const existing = JSON.parse(localStorage.getItem('timelineEvents') || '[]');
     localStorage.setItem('timelineEvents', JSON.stringify([newEntry, ...existing]));
 
-    // Show toast
     toast.success(`${type} with ${friend.name} logged!`, {
       style: {
         borderRadius: '16px',
@@ -75,6 +73,7 @@ export default function FriendDetails() {
   if (!friend) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#F8F9FA]">
+        <Toaster position="top-right" />
         <p className="text-xl font-bold text-gray-400">Loading friend profile...</p>
       </div>
     );
