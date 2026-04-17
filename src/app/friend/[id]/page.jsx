@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import toast, { Toaster } from 'react-hot-toast';
 import { 
   Clock, 
   Target, 
@@ -12,24 +13,9 @@ import {
   Phone, 
   MessageSquareText, 
   Video, 
-  History, 
-  Pencil, 
-  Users 
+  Pencil,
 } from 'lucide-react';
 import Footer from '../../components/Footer'; 
-
-const interactionIcons = {
-  Text: MessageSquareText,
-  Meetup: Users,
-  Video: Video,
-};
-
-const recentInteractions = [
-  { type: "Text", desc: "Asked for career advice", date: "Jan 28, 2026" },
-  { type: "Meetup", desc: "Industry conference meetup", date: "Jan 28, 2026" },
-  { type: "Video", desc: "Asked for career advice", date: "Jan 28, 2026" },
-  { type: "Text", desc: "Asked for career advice", date: "Jan 28, 2026" },
-];
 
 export default function FriendDetails() {
   const params = useParams();
@@ -46,11 +32,45 @@ export default function FriendDetails() {
         console.error("Error fetching friend data:", error);
       }
     };
-
-    if (params.id) {
-      fetchFriendData();
-    }
+    if (params.id) fetchFriendData();
   }, [params.id]);
+
+  const handleCheckIn = (type) => {
+    const now = new Date();
+    const formatted = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+    const iconMap = {
+      Call: "/assets/call.png",
+      Text: "/assets/text.png",
+      Video: "/assets/video.png",
+    };
+
+    const newEntry = {
+      type,
+      friend: friend.name,
+      date: formatted,
+      iconPath: iconMap[type],
+    };
+
+    // Save to localStorage
+    const existing = JSON.parse(localStorage.getItem('timelineEvents') || '[]');
+    localStorage.setItem('timelineEvents', JSON.stringify([newEntry, ...existing]));
+
+    // Show toast
+    toast.success(`${type} with ${friend.name} logged!`, {
+      style: {
+        borderRadius: '16px',
+        background: '#1A202C',
+        color: '#fff',
+        fontSize: '13px',
+        fontWeight: '700',
+      },
+      iconTheme: {
+        primary: '#38A169',
+        secondary: '#fff',
+      },
+    });
+  };
 
   if (!friend) {
     return (
@@ -62,6 +82,7 @@ export default function FriendDetails() {
 
   return (
     <div className="bg-[#F8F9FA] min-h-screen flex flex-col font-sans">
+      <Toaster position="top-right" />
       <main className="flex-grow max-w-7xl mx-auto px-10 pt-16 pb-24 w-full">
         <div className="flex flex-col lg:flex-row gap-12">
           
@@ -72,7 +93,7 @@ export default function FriendDetails() {
                 className="w-24 h-24 rounded-full object-cover mb-6 ring-[12px] ring-[#F8F9FA]" 
                 alt={friend.name} 
               />
-              <h1 className="font-bold text-2xl text-[#1A202C] mb-2 tracking-tight"> {friend.name} </h1>
+              <h1 className="font-bold text-2xl text-[#1A202C] mb-2 tracking-tight">{friend.name}</h1>
               
               <div className="flex gap-2 mb-4">
                 <span className={`text-white text-[9px] px-3 py-1 rounded-full font-black uppercase tracking-wider ${friend.status === 'overdue' ? 'bg-[#FF4D4D]' : 'bg-[#38A169]'}`}> 
@@ -135,38 +156,15 @@ export default function FriendDetails() {
                   { label: "Text", icon: MessageSquareText },
                   { label: "Video", icon: Video },
                 ].map((check, i) => (
-                  <button key={i} className="bg-white py-10 rounded-[32px] shadow-sm border border-gray-50 hover:border-[#234235] transition-all flex flex-col items-center group">
+                  <button 
+                    key={i} 
+                    onClick={() => handleCheckIn(check.label)}
+                    className="bg-white py-10 rounded-[32px] shadow-sm border border-gray-50 hover:border-[#234235] transition-all flex flex-col items-center group"
+                  >
                     <check.icon className="w-8 h-8 text-[#234235] mb-4 group-hover:scale-110 transition-transform" />
                     <p className="text-[10px] text-gray-500 uppercase font-black tracking-widest">{check.label}</p>
                   </button>
                 ))}
-              </div>
-            </div>
-
-            <div className="bg-white p-10 rounded-[40px] shadow-sm border border-gray-50">
-              <div className="flex items-center justify-between mb-10">
-                <h3 className="text-xl font-bold text-[#1A202C]">Recent Interactions</h3>
-                <button className="flex items-center gap-2 bg-[#F7FAFC] px-5 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                  <History size={14} /> Full History
-                </button>
-              </div>
-              
-              <div className="space-y-8">
-                {recentInteractions.map((inter, i) => {
-                  const Icon = interactionIcons[inter.type];
-                  return (
-                    <div key={i} className="flex items-center gap-6">
-                      <div className="bg-[#F7FAFC] p-4 rounded-full">
-                        <Icon className="w-5 h-5 text-[#234235]" />
-                      </div>
-                      <div className="flex-grow">
-                        <p className="font-bold text-[#1A202C]">{inter.type}</p>
-                        <p className="text-xs text-gray-500">{inter.desc}</p>
-                      </div>
-                      <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{inter.date}</p>
-                    </div>
-                  );
-                })}
               </div>
             </div>
           </section>
