@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# KeenKeeper — Keep Your Friendships Alive
 
-## Getting Started
+## 📌 Project Overview
+KeenKeeper is a responsive friendship management web application designed to help users stay connected with their friends. It allows users to track communication, set relationship goals, and log interactions like calls, texts, and video chats. With a clean UI and interactive features, KeenKeeper ensures you never lose touch with the people who matter most.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Technologies Used
+- React.js  
+- React Router  
+- Tailwind CSS  
+- Recharts (for analytics visualization)  
+- JSON (for mock data)  
+- React Toastify (for notifications)  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## ✨ Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. 📋 Friend Management Dashboard
+- View all friends in a responsive grid layout  
+- Track days since last contact  
+- Visual status indicators (overdue, almost due, on-track)  
+- Detailed profile pages for each friend  
 
-## Learn More
+### 2. ⚡ Quick Interaction Logging
+- Instantly log interactions (Call, Text, Video)  
+- Automatically updates the Timeline  
+- Real-time toast notifications for user feedback  
 
-To learn more about Next.js, take a look at the following resources:
+### 3. 📊 Friendship Analytics & Timeline
+- Timeline page showing all interaction history  
+- Filter interactions by type (Call, Text, Video)  
+- Analytics page with a Pie Chart visualizing communication patterns  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📱 Responsive Design
+Fully optimized for mobile, tablet, and desktop devices to ensure a seamless user experience across all screen sizes.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📂 Additional Features
+- Custom 404 Page for invalid routes  
+- Loading animation while fetching data  
+- Persistent routing without reload errors after deployment  
+- Clean and user-friendly UI based on Figma design  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
