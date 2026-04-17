@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import Footer from '../components/Footer';
 
 const data = [
@@ -9,6 +9,21 @@ const data = [
   { name: 'Call', value: 45, color: '#1E3A32' },
   { name: 'Video', value: 25, color: '#38A169' },
 ];
+
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    const item = payload[0];
+    return (
+      <div className="bg-white border border-gray-100 rounded-2xl shadow-lg px-5 py-3">
+        <p className="text-sm font-bold text-[#1A202C]">{item.name}</p>
+        <p className="text-xs font-semibold mt-0.5" style={{ color: item.payload.color }}>
+          {item.value}%
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
 
 export default function FriendshipAnalytics() {
   return (
@@ -21,10 +36,29 @@ export default function FriendshipAnalytics() {
             <div className="flex-grow flex items-center justify-center">
               <ResponsiveContainer width="100%" height={350}>
                 <PieChart>
-                  <Pie data={data} cx="50%" cy="45%" innerRadius={80} outerRadius={120} paddingAngle={8} dataKey="value" stroke="none">
-                    {data.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
+                  <Pie
+                    data={data}
+                    cx="50%"
+                    cy="45%"
+                    innerRadius={80}
+                    outerRadius={120}
+                    paddingAngle={8}
+                    dataKey="value"
+                    stroke="none"
+                  >
+                    {data.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
                   </Pie>
-                  <Legend verticalAlign="bottom" height={36} iconType="circle" formatter={(value) => <span className="text-xs font-bold text-gray-500 mx-2">{value}</span>} />
+                  <Tooltip content={<CustomTooltip />} />
+                  <Legend
+                    verticalAlign="bottom"
+                    height={36}
+                    iconType="circle"
+                    formatter={(value) => (
+                      <span className="text-xs font-bold text-gray-500 mx-2">{value}</span>
+                    )}
+                  />
                 </PieChart>
               </ResponsiveContainer>
             </div>
