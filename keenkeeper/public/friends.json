@@ -1,0 +1,10 @@
+[
+  { "id": 1, "name": "David Kim", "picture": "https://i.pravatar.cc/150?u=1", "status": "almost due", "tags": ["WORK"], "days_since_contact": 62 },
+  { "id": 2, "name": "Emma Wilson", "picture": "https://i.pravatar.cc/150?u=2", "status": "overdue", "tags": ["FAMILY"], "days_since_contact": 62 },
+  { "id": 3, "name": "Lisa Nakamura", "picture": "https://i.pravatar.cc/150?u=3", "status": "overdue", "tags": ["WORK"], "days_since_contact": 62 },
+  { "id": 4, "name": "James Wright", "picture": "https://i.pravatar.cc/150?u=4", "status": "overdue", "tags": ["HOBBY", "TRAVEL"], "days_since_contact": 62 },
+  { "id": 5, "name": "David Kim", "picture": "https://i.pravatar.cc/150?u=5", "status": "overdue", "tags": ["WORK"], "days_since_contact": 62 },
+  { "id": 6, "name": "Emma Wilson", "picture": "https://i.pravatar.cc/150?u=6", "status": "on-track", "tags": ["FAMILY"], "days_since_contact": 62 },
+  { "id": 7, "name": "Lisa Nakamura", "picture": "https://i.pravatar.cc/150?u=7", "status": "on-track", "tags": ["WORK"], "days_since_contact": 62 },
+  { "id": 8, "name": "James Wright", "picture": "https://i.pravatar.cc/150?u=8", "status": "almost due", "tags": ["HOBBY", "TRAVEL"], "days_since_contact": 62 }
+]
